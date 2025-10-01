@@ -47,10 +47,16 @@ export default function ClockCard() {
             {t("dashboard.clock.cityLabel")}
           </span>
           <div className="flex min-w-0 items-end gap-[clamp(8px,1vw,14px)]">
-            <span className="truncate text-[clamp(28px,5vw,70px)] font-semibold leading-none tracking-tight">
+            <span
+              className="truncate text-[clamp(28px,5vw,70px)] font-semibold leading-none tracking-tight"
+              suppressHydrationWarning
+            >
               {clock.time}
             </span>
-            <span className="rounded-full border border-white/20 bg-white/10 px-[clamp(8px,1vw,12px)] py-[clamp(3px,0.5vw,5px)] text-[clamp(16px,2.5vw,32px)] font-semibold text-white/85">
+            <span
+              className="rounded-full border border-white/20 bg-white/10 px-[clamp(8px,1vw,12px)] py-[clamp(3px,0.5vw,5px)] text-[clamp(16px,2.5vw,32px)] font-semibold text-white/85"
+              suppressHydrationWarning
+            >
               {clock.seconds}
             </span>
           </div>
@@ -63,13 +69,17 @@ export default function ClockCard() {
           <dt className="text-[clamp(12px,1.4vw,16px)] uppercase tracking-[0.35em] text-white/55">
             {t("dashboard.clock.dayLabel")}
           </dt>
-          <dd className="truncate text-white/90">{clock.day}</dd>
+          <dd className="truncate text-white/90" suppressHydrationWarning>
+            {clock.day}
+          </dd>
         </div>
         <div className="flex min-w-0 flex-col">
           <dt className="text-[clamp(12px,1.4vw,16px)] uppercase tracking-[0.35em] text-white/55">
             {t("dashboard.clock.dateLabel")}
           </dt>
-          <dd className="truncate text-white/90">{clock.date}</dd>
+          <dd className="truncate text-white/90" suppressHydrationWarning>
+            {clock.date}
+          </dd>
         </div>
       </dl>
 
@@ -124,3 +134,4 @@ function ClockHand({
 
   return <div className="absolute left-1/2 top-1/2 origin-bottom" style={style} />;
 }
+

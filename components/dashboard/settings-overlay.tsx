@@ -12,10 +12,18 @@ export default function SettingsOverlay() {
   const [manualInput, setManualInput] = useState("");
   const { availableThemes, themeId, setThemeId } = useThemeContext();
   const { selection, setSelection, presets } = useWeatherLocation();
-  const { availableStops: busStopOptions, selectedStops: busSelections, setStopId } = useBusStopContext();
+  const {
+    availableStops: busStopOptions,
+    selectedStops: busSelections,
+    setStopId,
+    setStopCustomName,
+  } = useBusStopContext();
   const { t, language, setLanguage, availableLanguages } = useTranslation();
   const [busStopInputs, setBusStopInputs] = useState<[string, string]>(
     () => busSelections.map((stop) => stop.id) as [string, string],
+  );
+  const [busNameInputs, setBusNameInputs] = useState<[string, string]>(
+    () => busSelections.map((stop) => stop.customName ?? "") as [string, string],
   );
 
   const currentLocationId = selection.type === "preset" ? selection.location.id : "custom";
@@ -23,6 +31,7 @@ export default function SettingsOverlay() {
   useEffect(() => {
     if (!open) return;
     setBusStopInputs(busSelections.map((stop) => stop.id) as [string, string]);
+    setBusNameInputs(busSelections.map((stop) => stop.customName ?? "") as [string, string]);
   }, [busSelections, open]);
 
   const handleManualLocation = () => {
@@ -38,6 +47,11 @@ export default function SettingsOverlay() {
     setBusStopInputs((prev) => {
       const next = [...prev] as [string, string];
       next[index] = value;
+      return next;
+    });
+    setBusNameInputs((prev) => {
+      const next = [...prev] as [string, string];
+      next[index] = "";
       return next;
     });
   };
@@ -57,6 +71,39 @@ export default function SettingsOverlay() {
     setBusStopInputs((prev) => {
       const next = [...prev] as [string, string];
       next[index] = trimmed;
+      return next;
+    });
+    setBusNameInputs((prev) => {
+      const next = [...prev] as [string, string];
+      next[index] = "";
+      return next;
+    });
+  };
+
+  const handleBusNameInputChange = (index: 0 | 1, value: string) => {
+    setBusNameInputs((prev) => {
+      const next = [...prev] as [string, string];
+      next[index] = value;
+      return next;
+    });
+  };
+
+  const handleBusNameSave = (index: 0 | 1) => {
+    const value = busNameInputs[index];
+    const trimmed = value.trim();
+    setStopCustomName(index, trimmed);
+    setBusNameInputs((prev) => {
+      const next = [...prev] as [string, string];
+      next[index] = trimmed;
+      return next;
+    });
+  };
+
+  const handleBusNameReset = (index: 0 | 1) => {
+    setStopCustomName(index, "");
+    setBusNameInputs((prev) => {
+      const next = [...prev] as [string, string];
+      next[index] = "";
       return next;
     });
   };
@@ -218,6 +265,11 @@ export default function SettingsOverlay() {
               const selectValue = presetMatch ? presetMatch.id : "custom";
               const pendingValue = busStopInputs[index];
               const isDirty = pendingValue.trim() !== stop.id;
+              const pendingName = busNameInputs[index];
+              const currentName = stop.customName ?? "";
+              const isNameDirty = pendingName.trim() !== currentName.trim();
+              const baseLabel = t("dashboard.doorboard.busStopLabel", { label: stop.label });
+              const displayLabel = currentName.trim() || baseLabel;
 
               return (
                 <div
@@ -257,8 +309,38 @@ export default function SettingsOverlay() {
                       {t("dashboard.settings.busSave")}
                     </button>
                   </div>
+                  <div className="space-y-2">
+                    <label className="block text-[clamp(0.75rem,0.9vw,0.95rem)] text-white/70">
+                      {t("dashboard.settings.busNameLabel")}
+                    </label>
+                    <div className="flex items-center gap-2">
+                      <input
+                        value={pendingName}
+                        onChange={(event) => handleBusNameInputChange(index as 0 | 1, event.target.value)}
+                        placeholder={t("dashboard.settings.busNamePlaceholder")}
+                        className="flex-1 rounded-xl border border-white/20 bg-black/30 px-3 py-2 text-white placeholder:text-white/40"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => handleBusNameSave(index as 0 | 1)}
+                        className="rounded-xl border border-white/30 px-3 py-2 text-[clamp(0.75rem,0.9vw,0.95rem)] text-white hover:border-white/50 disabled:cursor-not-allowed disabled:border-white/10 disabled:text-white/40"
+                        disabled={!isNameDirty}
+                      >
+                        {t("common.actions.save")}
+                      </button>
+                    </div>
+                    {currentName.trim() ? (
+                      <button
+                        type="button"
+                        onClick={() => handleBusNameReset(index as 0 | 1)}
+                        className="text-left text-[clamp(0.7rem,0.85vw,0.9rem)] text-white/60 underline-offset-2 hover:underline"
+                      >
+                        {t("dashboard.settings.busNameReset")}
+                      </button>
+                    ) : null}
+                  </div>
                   <p className="text-[clamp(0.7rem,0.85vw,0.9rem)] text-white/60">
-                    {t("dashboard.settings.busShowing", { label: stop.label })}
+                    {t("dashboard.settings.busShowing", { label: displayLabel })}
                   </p>
                 </div>
               );

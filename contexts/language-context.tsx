@@ -43,12 +43,12 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     } else {
       const browserLanguage = window.navigator.language.toLowerCase();
       if (browserLanguage.startsWith("zh")) {
-      setLanguageState("zh");
-    } else if (browserLanguage.startsWith("ms")) {
-      setLanguageState("ms");
-    } else if (browserLanguage.startsWith("ta")) {
-      setLanguageState("ta");
-    }
+        setLanguageState("zh");
+      } else if (browserLanguage.startsWith("ms")) {
+        setLanguageState("ms");
+      } else if (browserLanguage.startsWith("ta")) {
+        setLanguageState("ta");
+      }
     }
     setReady(true);
   }, []);
@@ -141,4 +141,5 @@ function resolveTranslation(
     return String(value);
   });
 }
+
 

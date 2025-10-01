@@ -5,13 +5,19 @@ import ClockCard from "@/components/dashboard/clock-card";
 import MRTNetworkCard from "@/components/dashboard/mrt-network-card";
 import SettingsOverlay from "@/components/dashboard/settings-overlay";
 import WeatherCard from "@/components/dashboard/weather-card";
-import { useBusStopContext } from "@/contexts/bus-stop-context";
+import { useBusStopContext, type BusStopSelection } from "@/contexts/bus-stop-context";
 import { useTranslation } from "@/contexts/language-context";
 
 export default function DoorboardClient() {
   const { selectedStops } = useBusStopContext();
   const { t } = useTranslation();
   const [firstStop, secondStop] = selectedStops;
+
+  const resolveLabel = (stop: BusStopSelection) => {
+    const custom = stop.customName.trim();
+    if (custom) return custom;
+    return t("dashboard.doorboard.busStopLabel", { label: stop.label });
+  };
 
   return (
     <>
@@ -28,13 +34,13 @@ export default function DoorboardClient() {
         </div>
         <div className="col-span-12 lg:col-span-5 xl:row-span-4">
           <BusStopCard
-            label={t("dashboard.doorboard.busStopLabel", { label: firstStop.label })}
+            label={resolveLabel(firstStop)}
             stopId={firstStop.id}
           />
         </div>
         <div className="col-span-12 lg:col-span-5 xl:row-span-4">
           <BusStopCard
-            label={t("dashboard.doorboard.busStopLabel", { label: secondStop.label })}
+            label={resolveLabel(secondStop)}
             stopId={secondStop.id}
           />
         </div>
@@ -42,3 +48,5 @@ export default function DoorboardClient() {
     </>
   );
 }
+
+
