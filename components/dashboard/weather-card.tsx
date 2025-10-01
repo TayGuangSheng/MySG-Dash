@@ -49,6 +49,8 @@ const FORECAST_TRANSLATION_KEYS = {
   fog: "dashboard.weatherCard.forecasts.fog",
 } as const satisfies Record<string, TranslationKey>;
 
+type ForecastKey = keyof typeof FORECAST_TRANSLATION_KEYS;
+
 export default function WeatherCard() {
   const { selection } = useWeatherLocation();
   const { weather, isLoading, error } = useWeather(selection);
@@ -221,17 +223,23 @@ function slugifyForecast(value: string) {
     .replace(/^-+|-+$/g, "");
 }
 
+function isForecastKey(value: string): value is ForecastKey {
+  return value in FORECAST_TRANSLATION_KEYS;
+}
+
 function translateForecast(forecast: string | null | undefined, t: Translator) {
   if (!forecast) {
     return t(FORECAST_TRANSLATION_KEYS.default);
   }
 
   let slug = slugifyForecast(forecast);
-  let key = FORECAST_TRANSLATION_KEYS[slug];
+  let key = isForecastKey(slug) ? FORECAST_TRANSLATION_KEYS[slug] : undefined;
 
   while (!key && slug.includes("-")) {
     slug = slug.replace(/-[^-]+$/, "");
-    key = FORECAST_TRANSLATION_KEYS[slug];
+    if (isForecastKey(slug)) {
+      key = FORECAST_TRANSLATION_KEYS[slug];
+    }
   }
 
   if (key) {
