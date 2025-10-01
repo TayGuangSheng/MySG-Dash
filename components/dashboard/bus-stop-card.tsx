@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { Card } from "@/components/ui/card";
 import { useBusArrivals } from "@/hooks/use-bus-arrivals";
@@ -7,6 +7,8 @@ import type { BusArrival } from "@/types/api";
 
 export default function BusStopCard({ label, stopId }: { label: string; stopId: string }) {
   const { arrivals, isLoading, error } = useBusArrivals(stopId);
+  const services = arrivals?.etas ?? [];
+  const displayedServices = services.slice(0, 12);
 
   return (
     <Card className="flex flex-col gap-[clamp(16px,1.4vw,24px)] p-[clamp(20px,1.8vw,32px)]">
@@ -18,10 +20,9 @@ export default function BusStopCard({ label, stopId }: { label: string; stopId: 
       </header>
 
       <section className="flex-1">
-        {arrivals?.etas?.length ? (
-          <div className="grid h-full min-h-0 grid-cols-3 gap-[clamp(4px,0.6vw,8px)] auto-rows-[120px]">
-            {/* Changed auto-rows-[minmax(60px,1fr)] to auto-rows-[60px] */}
-            {arrivals.etas.map((service) => (
+        {displayedServices.length ? (
+          <div className="grid h-full grid-cols-3 content-start gap-[clamp(4px,0.6vw,8px)] auto-rows-[minmax(0,140px)]">
+            {displayedServices.map((service) => (
               <BusService key={service.service} service={service} />
             ))}
           </div>
@@ -51,14 +52,16 @@ function BusService({ service }: BusServiceProps) {
     <article className="grid min-h-0 grid-rows-[auto_1fr] gap-[clamp(4px,0.4vw,6px)] rounded-xl border border-white/12 bg-white/5 px-[clamp(8px,1vw,12px)] py-[clamp(6px,0.8vw,10px)] shadow-inner">
       <div className="flex min-w-0 items-center justify-between gap-2">
         <span className="text-[clamp(14px,1.6vw,20px)] font-semibold tracking-tight">{service.service}</span>
-        {next?.load && <LoadBadge load={next.load} />}
+        {next?.load ? <LoadBadge load={next.load} /> : <StatusBadge status={service.status} /> }
       </div>
       <div className="flex items-center justify-between gap-2">
         <div className="flex items-baseline gap-[clamp(2px,0.4vw,4px)]">
           <span className="text-[clamp(18px,2.5vw,32px)] font-semibold leading-none">
             {formatEta(next?.etaMin)}
           </span>
-          <span className="text-[clamp(8px,1vw,12px)] text-white/60">min</span>
+          {next ? (
+            <span className="text-[clamp(8px,1vw,12px)] text-white/60">min</span>
+          ) : null}
         </div>
         <div className="flex min-w-0 flex-wrap items-center justify-end gap-[clamp(4px,0.6vw,8px)] text-[clamp(8px,1vw,12px)] text-white/70">
           {rest.length ? (
@@ -103,4 +106,13 @@ function formatEta(value?: number) {
   if (value === undefined || value === null) return "--";
   if (value <= 0) return "0";
   return String(value);
+}
+
+function StatusBadge({ status }: { status?: string }) {
+  if (!status) return null;
+  return (
+    <span className="rounded-full border border-white/25 px-2 py-0.5 text-[clamp(8px,1vw,12px)] text-white/70">
+      {status}
+    </span>
+  );
 }

@@ -69,11 +69,11 @@ function LineTile({ label, line, color, status, note }: LineTileProps) {
 					aria-hidden
 				/>
 			</div>
-			<h3 className="text-[clamp(10px,1.2vw,14px)] font-semibold text-white">
+			<h3 className="text-[clamp(9px,1vw,12px)] font-semibold text-white">
 				{label}
 			</h3>
 			<p
-				className={`text-[clamp(10px,1.2vw,14px)] font-semibold ${statusColor(
+				className={`text-[clamp(8px,0.9vw,11px)] font-semibold ${statusColor(
 					status
 				)}`}
 			>

@@ -10,6 +10,7 @@ import type { WeatherApiResponse } from "@/types/api";
 const METRIC_LABEL_CLASS = "text-[clamp(10px,1.2vw,14px)] uppercase tracking-[0.3em] text-white/55";
 const METRIC_VALUE_CLASS = "text-[clamp(16px,2.5vw,36px)] font-semibold text-white";
 
+const capitaliseWords = (value?: string | null) => value ? value.replace(/\b\w/g, (match) => match.toUpperCase()) : (value ?? "");
 export default function WeatherCard() {
   const { selection } = useWeatherLocation();
   const { weather, isLoading, error } = useWeather(selection);
@@ -65,7 +66,7 @@ export default function WeatherCard() {
         <Metric
           label="PSI"
           value={formatNumber(weather?.psi?.value)}
-          detail={weather?.psi?.region ? `${weather.psi.region} region` : "24h PSI"}
+          detail={weather?.psi?.region ? `${capitaliseWords(weather.psi.region)} region` : "24h PSI"}
         />
         <Metric
           label="Rain"
@@ -77,7 +78,7 @@ export default function WeatherCard() {
       <footer className="mt-auto space-y-[clamp(8px,1vw,12px)] text-[clamp(12px,1.4vw,16px)] text-white/70">
         {weather?.rainyAreas?.length ? (
           <p className="truncate">
-            Rainy nearby: {weather.rainyAreas.slice(0, 3).map((area) => area.area).join(", ")}
+            Rainy nearby: {weather.rainyAreas.slice(0, 3).map((area) => capitaliseWords(area.area)).join(", ")}
             {weather.rainyAreas.length > 3 ? "..." : ""}
           </p>
         ) : (
@@ -103,7 +104,7 @@ function Metric({ label, value, detail }: MetricProps) {
       <span className="text-[clamp(8px,0.9vw,12px)] text-white/60 truncate">{detail}</span>
 
       {/* Main value text (e.g. "central region") */}
-      <span className="text-[clamp(10px,1.2vw,16px)] text-white/80 truncate">{value}</span>
+      <span className="text-[clamp(14px,2.1vw,28px)] font-semibold text-white/85 truncate">{value}</span>
 
       {/* Label text (e.g. "PSI", "TEMPERATURE") */}
       <span className="text-[clamp(7px,0.8vw,10px)] uppercase tracking-[0.2em] text-white/50 truncate">
@@ -111,17 +112,6 @@ function Metric({ label, value, detail }: MetricProps) {
       </span>
     </div>
   );
-}
-
-function weatherHeadlineEmoji(forecast?: string | null, anyRain?: boolean) {
-  if (anyRain) return "🌧"; // Rain
-  if (!forecast) return "❓"; // Question mark
-  const normalised = forecast.toLowerCase();
-  if (normalised.includes("thunder")) return "⛈"; // Thunder
-  if (normalised.includes("showers") || normalised.includes("rain")) return "🌧"; // Rain
-  if (normalised.includes("cloud")) return "☁"; // Cloud
-  if (normalised.includes("sun") || normalised.includes("fair")) return "☀"; // Sun
-  return "❓"; // Question mark fallback
 }
 
 function uvDetail(value: number | null | undefined) {
@@ -132,11 +122,32 @@ function uvDetail(value: number | null | undefined) {
   if (value <= 10) return "Very high";
   return "Extreme";
 }
+function weatherHeadlineEmoji(forecast?: string | null, anyRain?: boolean) {
+  const normalized = forecast?.toLowerCase().trim();
+  if (!normalized || normalized.length === 0) {
+    return anyRain ? "🌧️" : "❓";
+  }
+
+  const hasAll = (...terms: string[]) => terms.every((term) => normalized.includes(term));
+
+  if (normalized.includes("thunder")) return "⛈️";
+  if (normalized.includes("showers")) return "🌦️";
+  if (normalized.includes("rain")) return "🌧️";
+  if (hasAll("partly", "cloud")) return "🌤️";
+  if (hasAll("mostly", "cloud")) return "☁️";
+  if (normalized.includes("cloud")) return "☁️";
+  if (normalized.includes("hazy") || normalized.includes("mist") || normalized.includes("smok")) return "🌫️";
+  if (normalized.includes("wind")) return "💨";
+  if (normalized.includes("fair") || normalized.includes("sun") || normalized.includes("clear")) return "☀️";
+
+  return anyRain ? "🌧️" : "☀️";
+}
+
 
 function rainDetail(weather?: WeatherApiResponse | null) {
   if (!weather) return "Forecast pending";
   if (weather.anyRain) {
-    return weather.rainyAreas.length ? `Watch ${weather.rainyAreas[0].area}` : "Keep umbrella handy";
+    return weather.rainyAreas.length ? `Watch ${capitaliseWords(weather.rainyAreas[0].area)}` : "Keep umbrella handy";
   }
   return "All clear";
 }

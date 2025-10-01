@@ -15,7 +15,6 @@ export default function DoorboardClient() {
     <>
       <SettingsOverlay />
       <div className="grid h-full w-full grid-cols-12 auto-rows-[1fr] gap-2">
-        {/* Added gap-4 which adds 1rem (16px) spacing between grid items */}
         <div className="col-span-12 xl:col-span-5 xl:row-span-2">
           <ClockCard />
         </div>

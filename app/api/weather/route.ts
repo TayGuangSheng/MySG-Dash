@@ -1,4 +1,4 @@
-import { NextRequest } from "next/server";
+﻿import { NextRequest } from "next/server";
 import { findNearest } from "@/lib/geo";
 import { resolveLocation, type WeatherLocationSelection } from "@/lib/locations";
 
@@ -48,7 +48,31 @@ export async function GET(request: NextRequest) {
 
   const temperatureReading = temperature && pickTemperatureForLocation(temperature, resolved);
   const psiReading = psi && pickPsiForLocation(psi, resolved);
-  const uvValue = uv?.items?.[0]?.index?.slice(-1)[0]?.value ?? null;
+  const uvReadings = uv?.items?.[0]?.index ?? [] as Array<{ timestamp: string; value: number | null }>;
+  const uvValue = (() => {
+    if (!uvReadings.length) return null;
+    let latestValue: number | null = null;
+    let latestTimestamp = -Infinity;
+    for (const entry of uvReadings) {
+      const numeric = entry?.value;
+      if (numeric === null || numeric === undefined) {
+        continue;
+      }
+      const asNumber = Number(numeric);
+      if (!Number.isFinite(asNumber)) {
+        continue;
+      }
+      const entryTimestamp = Date.parse(entry?.timestamp ?? "");
+      if (!Number.isFinite(entryTimestamp)) {
+        continue;
+      }
+      if (entryTimestamp >= latestTimestamp) {
+        latestTimestamp = entryTimestamp;
+        latestValue = asNumber;
+      }
+    }
+    return latestValue;
+  })();
 
   const anyRain = Boolean(
     rainyAreas?.length || rainfall?.items?.[0]?.readings?.some((reading) => reading.value > 0),
@@ -139,7 +163,7 @@ type RainfallResponse = {
 type UvResponse = {
   items: Array<{
     timestamp: string;
-    index: Array<{ timestamp: string; value: number }>;
+    index: Array<{ timestamp: string; value: number | null }>;
   }>;
 };
 

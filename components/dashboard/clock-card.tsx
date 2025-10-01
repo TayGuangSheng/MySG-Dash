@@ -71,7 +71,7 @@ function AnalogClock({ hourAngle, minuteAngle, secondAngle }: AnalogProps) {
     <div className="relative h-[clamp(70px,11vw,120px)] w-[clamp(70px,11vw,120px)] min-w-[clamp(70px,11vw,120px)]">
       <div className="absolute inset-0 rounded-full border border-white/20 bg-white/5 backdrop-blur">
         <div className="absolute inset-[15%] rounded-full border border-dashed border-white/10" />
-        <ClockHand angle={hourAngle} length="35%" thickness="2px" opacity={0.9} />
+        <ClockHand angle={hourAngle} length="30%" thickness="2px" opacity={0.9} />
         <ClockHand angle={minuteAngle} length="40%" thickness="1.5px" opacity={0.8} />
         <ClockHand angle={secondAngle} length="45%" thickness="1px" color="var(--highlight-color)" opacity={0.9} />
         <div className="absolute inset-1/2 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white" />

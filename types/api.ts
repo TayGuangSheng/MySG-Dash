@@ -1,4 +1,4 @@
-export type BusArrivalLoad = "SEA" | "SDA" | "LSD";
+﻿export type BusArrivalLoad = "SEA" | "SDA" | "LSD";
 
 export type BusArrival = {
   service: string;
@@ -6,6 +6,7 @@ export type BusArrival = {
     etaMin: number;
     load?: BusArrivalLoad;
   }>;
+  status?: string;
 };
 
 export type BusApiResponse = {
