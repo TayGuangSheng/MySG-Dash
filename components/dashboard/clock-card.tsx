@@ -1,19 +1,31 @@
-"use client";
+﻿"use client";
 
 import { useMemo, type CSSProperties } from "react";
+import { useTranslation } from "@/contexts/language-context";
 import { Card } from "@/components/ui/card";
-import { getDailyQuote } from "@/lib/quotes";
+import { getDailyQuote, type QuoteId } from "@/lib/quotes";
 import { useClock, getAnalogAngles } from "@/hooks/use-clock";
+import type { TranslationKey } from "@/locales";
 
-const SG_LABEL = "Singapore";
 const SG_TIMEZONE = "Asia/Singapore";
 
+const QUOTE_TEXT_KEYS = {
+  smallSteps: "dashboard.quotes.smallSteps.text",
+  consistencyBeatsIntensity: "dashboard.quotes.consistencyBeatsIntensity.text",
+  systemsOverGoals: "dashboard.quotes.systemsOverGoals.text",
+  disciplineBridge: "dashboard.quotes.disciplineBridge.text",
+  sumOfEfforts: "dashboard.quotes.sumOfEfforts.text",
+  futureToday: "dashboard.quotes.futureToday.text",
+  stayFocused: "dashboard.quotes.stayFocused.text",
+} as const satisfies Record<QuoteId, TranslationKey>;
+
 export default function ClockCard() {
-  const clock = useClock(1000);
-  const angles = getAnalogAngles(clock.now);
+  const { t, locale } = useTranslation();
+  const clock = useClock(1000, locale);
+  const angles = getAnalogAngles(clock.now, locale);
 
   const quote = useMemo(() => {
-    const seed = new Intl.DateTimeFormat("en-SG", {
+    const seed = new Intl.DateTimeFormat(locale, {
       timeZone: SG_TIMEZONE,
       weekday: "long",
       year: "numeric",
@@ -21,14 +33,18 @@ export default function ClockCard() {
       day: "numeric",
     }).format(clock.now);
     return getDailyQuote(seed);
-  }, [clock.now]);
+  }, [clock.now, locale]);
+
+  const quoteKey = QUOTE_TEXT_KEYS[quote.id];
+  const translatedQuote = t(quoteKey);
+  const quoteText = translatedQuote === quoteKey ? quote.text : translatedQuote;
 
   return (
     <Card className="flex flex-col gap-[clamp(16px,1.6vw,24px)] p-[clamp(16px,1.8vw,32px)]">
       <header className="flex min-w-0 flex-wrap items-start justify-between gap-[clamp(16px,1.6vw,24px)]">
         <div className="flex min-w-0 flex-col gap-[clamp(4px,0.6vw,8px)]">
           <span className="text-[clamp(10px,1.2vw,14px)] font-medium uppercase tracking-[0.3em] text-white/70">
-            {SG_LABEL}
+            {t("dashboard.clock.cityLabel")}
           </span>
           <div className="flex min-w-0 items-end gap-[clamp(8px,1vw,14px)]">
             <span className="truncate text-[clamp(28px,5vw,70px)] font-semibold leading-none tracking-tight">
@@ -44,17 +60,21 @@ export default function ClockCard() {
 
       <dl className="grid grid-cols-1 gap-[clamp(8px,1.2vw,14px)] text-[clamp(14px,1.8vw,20px)] font-medium sm:grid-cols-2">
         <div className="flex min-w-0 flex-col">
-          <dt className="text-[clamp(12px,1.4vw,16px)] uppercase tracking-[0.35em] text-white/55">Day</dt>
+          <dt className="text-[clamp(12px,1.4vw,16px)] uppercase tracking-[0.35em] text-white/55">
+            {t("dashboard.clock.dayLabel")}
+          </dt>
           <dd className="truncate text-white/90">{clock.day}</dd>
         </div>
         <div className="flex min-w-0 flex-col">
-          <dt className="text-[clamp(12px,1.4vw,16px)] uppercase tracking-[0.35em] text-white/55">Date</dt>
+          <dt className="text-[clamp(12px,1.4vw,16px)] uppercase tracking-[0.35em] text-white/55">
+            {t("dashboard.clock.dateLabel")}
+          </dt>
           <dd className="truncate text-white/90">{clock.date}</dd>
         </div>
       </dl>
 
       <footer className="mt-auto flex min-w-0 flex-col gap-[clamp(6px,0.8vw,10px)] text-[clamp(12px,1.4vw,16px)] text-white/80">
-        <p className="text-balance font-semibold leading-snug">&quot;{quote.text}&quot;</p>
+        <p className="text-balance font-semibold leading-snug">&quot;{quoteText}&quot;</p>
       </footer>
     </Card>
   );

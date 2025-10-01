@@ -1,6 +1,7 @@
 ﻿"use client";
 
 import { useEffect, useState } from "react";
+import { useTranslation } from "@/contexts/language-context";
 import { useBusStopContext } from "@/contexts/bus-stop-context";
 import { useThemeContext } from "@/contexts/theme-context";
 import { useWeatherLocation } from "@/contexts/weather-location-context";
@@ -12,6 +13,7 @@ export default function SettingsOverlay() {
   const { availableThemes, themeId, setThemeId } = useThemeContext();
   const { selection, setSelection, presets } = useWeatherLocation();
   const { availableStops: busStopOptions, selectedStops: busSelections, setStopId } = useBusStopContext();
+  const { t, language, setLanguage, availableLanguages } = useTranslation();
   const [busStopInputs, setBusStopInputs] = useState<[string, string]>(
     () => busSelections.map((stop) => stop.id) as [string, string],
   );
@@ -65,7 +67,7 @@ export default function SettingsOverlay() {
         type="button"
         onClick={() => setOpen((prev) => !prev)}
         className="pointer-events-auto flex h-[clamp(2.6rem,3vw,3rem)] w-[clamp(2.6rem,3vw,3rem)] items-center justify-center rounded-full border border-white/20 bg-black/30 text-[clamp(1.3rem,1.8vw,1.8rem)] text-white shadow-lg backdrop-blur transition hover:scale-105"
-        aria-label="Open settings"
+        aria-label={t("dashboard.settings.ariaOpen")}
       >
         <svg
           aria-hidden="true"
@@ -89,21 +91,21 @@ export default function SettingsOverlay() {
       </button>
 
       {open && (
-        <div className="pointer-events-auto w-[clamp(18rem,24vw,24rem)] max-w-[90vw] rounded-3xl border border-white/15 bg-black/65 p-[clamp(1.2rem,1.6vw,1.8rem)] text-white shadow-2xl backdrop-blur-xl">
+        <div className="pointer-events-auto w-[clamp(18rem,24vw,24rem)] max-w-[90vw] rounded-3xl border border-white/15 bg-black/65 p-[clamp(1.2rem,1.6vw,1.8rem)] text-white shadow-2xl backdrop-blur-xl max-h-[min(80vh,40rem)] overflow-y-auto overscroll-contain">
           <div className="flex items-center justify-between">
-            <h2 className="text-[clamp(1.1rem,1.4vw,1.5rem)] font-semibold">Display settings</h2>
+            <h2 className="text-[clamp(1.1rem,1.4vw,1.5rem)] font-semibold">{t("dashboard.settings.title")}</h2>
             <button
               type="button"
               onClick={() => setOpen(false)}
               className="rounded-full border border-white/15 px-3 py-1 text-[clamp(0.75rem,0.9vw,0.95rem)] text-white/70 hover:border-white/40"
             >
-              Close
+              {t("common.actions.close")}
             </button>
           </div>
 
           <section className="mt-4 space-y-3">
             <h3 className="text-[clamp(0.9rem,1.1vw,1.15rem)] font-semibold uppercase tracking-[0.25em] text-white/70">
-              Theme
+              {t("dashboard.settings.themeHeading")}
             </h3>
             <div className="grid grid-cols-2 gap-3">
               {availableThemes.map((theme) => (
@@ -120,7 +122,7 @@ export default function SettingsOverlay() {
                 >
                   <span className="block font-semibold">{theme.label}</span>
                   <span className="block text-[clamp(0.7rem,0.85vw,0.9rem)] text-white/70">
-                    Accent {theme.accent}
+                    {t("dashboard.settings.themeAccent", { color: theme.accent })}
                   </span>
                 </button>
               ))}
@@ -129,10 +131,35 @@ export default function SettingsOverlay() {
 
           <section className="mt-6 space-y-3">
             <h3 className="text-[clamp(0.9rem,1.1vw,1.15rem)] font-semibold uppercase tracking-[0.25em] text-white/70">
-              Weather location
+              {t("dashboard.settings.languageHeading")}
+            </h3>
+            <p className="text-[clamp(0.75rem,0.9vw,0.95rem)] text-white/60">
+              {t("dashboard.settings.languageDescription")}
+            </p>
+            <div className="grid grid-cols-2 gap-3">
+              {availableLanguages.map((option) => (
+                <button
+                  key={option.code}
+                  type="button"
+                  onClick={() => setLanguage(option.code)}
+                  className={`rounded-2xl border px-3 py-2 text-left text-[clamp(0.8rem,0.95vw,1rem)] transition ${
+                    language === option.code
+                      ? "border-white/70 bg-white/15"
+                      : "border-white/15 bg-white/5 hover:border-white/40"
+                  }`}
+                >
+                  <span className="block font-semibold">{option.label}</span>
+                </button>
+              ))}
+            </div>
+          </section>
+
+          <section className="mt-6 space-y-3">
+            <h3 className="text-[clamp(0.9rem,1.1vw,1.15rem)] font-semibold uppercase tracking-[0.25em] text-white/70">
+              {t("dashboard.settings.weatherHeading")}
             </h3>
             <label className="block text-[clamp(0.75rem,0.9vw,0.95rem)] text-white/70">
-              Preset
+              {t("dashboard.settings.weatherPresetLabel")}
               <select
                 value={currentLocationId}
                 onChange={(event) => {
@@ -148,18 +175,18 @@ export default function SettingsOverlay() {
                     {preset.label}
                   </option>
                 ))}
-                <option value="custom">Custom GPS...</option>
+                <option value="custom">{t("dashboard.settings.weatherCustomOption")}</option>
               </select>
             </label>
             <div className="space-y-2">
               <label className="block text-[clamp(0.75rem,0.9vw,0.95rem)] text-white/70">
-                GPS (lat,lon)
+                {t("dashboard.settings.gpsLabel")}
               </label>
               <div className="flex items-center gap-2">
                 <input
                   value={manualInput}
                   onChange={(event) => setManualInput(event.target.value)}
-                  placeholder="1.300,103.800"
+                  placeholder={t("dashboard.settings.gpsPlaceholder")}
                   className="flex-1 rounded-xl border border-white/20 bg-black/30 px-3 py-2 text-white placeholder:text-white/40"
                 />
                 <button
@@ -167,12 +194,15 @@ export default function SettingsOverlay() {
                   onClick={handleManualLocation}
                   className="rounded-xl border border-white/30 px-3 py-2 text-[clamp(0.75rem,0.9vw,0.95rem)] text-white hover:border-white/50"
                 >
-                  Save
+                  {t("dashboard.settings.gpsSave")}
                 </button>
               </div>
               {selection.type === "gps" && (
                 <p className="text-[clamp(0.7rem,0.85vw,0.9rem)] text-white/60">
-                  Using GPS: {selection.lat.toFixed(3)}, {selection.lon.toFixed(3)}
+                  {t("dashboard.settings.gpsUsing", {
+                    lat: selection.lat.toFixed(3),
+                    lon: selection.lon.toFixed(3),
+                  })}
                 </p>
               )}
             </div>
@@ -180,7 +210,7 @@ export default function SettingsOverlay() {
 
           <section className="mt-6 space-y-4">
             <h3 className="text-[clamp(0.9rem,1.1vw,1.15rem)] font-semibold uppercase tracking-[0.25em] text-white/70">
-              Bus stops
+              {t("dashboard.settings.busHeading")}
             </h3>
             {[0, 1].map((index) => {
               const stop = busSelections[index];
@@ -196,7 +226,7 @@ export default function SettingsOverlay() {
                 >
                   <div className="flex items-center justify-between gap-2">
                     <span className="text-[clamp(0.8rem,0.95vw,1rem)] font-medium text-white/80">
-                      Stop {index + 1}
+                      {t("dashboard.settings.busStopLabel", { index: index + 1 })}
                     </span>
                     <select
                       value={selectValue}
@@ -208,14 +238,14 @@ export default function SettingsOverlay() {
                           {option.label}
                         </option>
                       ))}
-                      <option value="custom">Custom...</option>
+                      <option value="custom">{t("dashboard.settings.busCustomOption")}</option>
                     </select>
                   </div>
                   <div className="flex items-center gap-2">
                     <input
                       value={pendingValue}
                       onChange={(event) => handleBusStopInputChange(index as 0 | 1, event.target.value)}
-                      placeholder="e.g. 66039"
+                      placeholder={t("dashboard.settings.busPlaceholder")}
                       className="flex-1 rounded-xl border border-white/20 bg-black/30 px-3 py-2 text-white placeholder:text-white/40"
                     />
                     <button
@@ -224,11 +254,11 @@ export default function SettingsOverlay() {
                       className="rounded-xl border border-white/30 px-3 py-2 text-[clamp(0.75rem,0.9vw,0.95rem)] text-white hover:border-white/50 disabled:cursor-not-allowed disabled:border-white/10 disabled:text-white/40"
                       disabled={!pendingValue.trim() || !isDirty}
                     >
-                      Save
+                      {t("dashboard.settings.busSave")}
                     </button>
                   </div>
                   <p className="text-[clamp(0.7rem,0.85vw,0.9rem)] text-white/60">
-                    Showing Bus Stop {stop.label}
+                    {t("dashboard.settings.busShowing", { label: stop.label })}
                   </p>
                 </div>
               );

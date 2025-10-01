@@ -1,40 +1,33 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useMemo, useState } from "react";
 
 const SG_TIMEZONE = "Asia/Singapore";
 
-const TIME_FORMATTER = new Intl.DateTimeFormat("en-SG", {
-  hour: "2-digit",
-  minute: "2-digit",
-  hour12: false,
-  timeZone: SG_TIMEZONE,
-});
-
-const SECOND_FORMATTER = new Intl.DateTimeFormat("en-SG", {
-  second: "2-digit",
-  timeZone: SG_TIMEZONE,
-});
-
-const DAY_FORMATTER = new Intl.DateTimeFormat("en-SG", {
-  weekday: "long",
-  timeZone: SG_TIMEZONE,
-});
-
-const DATE_FORMATTER = new Intl.DateTimeFormat("en-SG", {
-  year: "numeric",
-  month: "long",
-  day: "numeric",
-  timeZone: SG_TIMEZONE,
-});
-
-const ANALOG_FORMATTER = new Intl.DateTimeFormat("en-SG", {
-  hour: "2-digit",
-  minute: "2-digit",
-  second: "2-digit",
-  hour12: false,
-  timeZone: SG_TIMEZONE,
-});
+function createFormatters(locale: string) {
+  return {
+    time: new Intl.DateTimeFormat(locale, {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+      timeZone: SG_TIMEZONE,
+    }),
+    second: new Intl.DateTimeFormat(locale, {
+      second: "2-digit",
+      timeZone: SG_TIMEZONE,
+    }),
+    day: new Intl.DateTimeFormat(locale, {
+      weekday: "long",
+      timeZone: SG_TIMEZONE,
+    }),
+    date: new Intl.DateTimeFormat(locale, {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      timeZone: SG_TIMEZONE,
+    }),
+  } as const;
+}
 
 export type ClockTick = {
   now: Date;
@@ -45,7 +38,7 @@ export type ClockTick = {
   date: string;
 };
 
-export function useClock(updateIntervalMs = 1000): ClockTick {
+export function useClock(updateIntervalMs = 1000, locale = "en-SG"): ClockTick {
   const [now, setNow] = useState(() => new Date());
 
   useEffect(() => {
@@ -56,20 +49,29 @@ export function useClock(updateIntervalMs = 1000): ClockTick {
     return () => clearInterval(interval);
   }, [updateIntervalMs]);
 
+  const formatters = useMemo(() => createFormatters(locale), [locale]);
+
   return useMemo(() => {
     return {
       now,
       iso: now.toISOString(),
-      time: TIME_FORMATTER.format(now),
-      seconds: SECOND_FORMATTER.format(now),
-      day: DAY_FORMATTER.format(now),
-      date: DATE_FORMATTER.format(now),
+      time: formatters.time.format(now),
+      seconds: formatters.second.format(now),
+      day: formatters.day.format(now),
+      date: formatters.date.format(now),
     };
-  }, [now]);
+  }, [formatters, now]);
 }
 
-export function getAnalogAngles(date: Date) {
-  const parts = ANALOG_FORMATTER.formatToParts(date);
+export function getAnalogAngles(date: Date, locale = "en-SG") {
+  const formatter = new Intl.DateTimeFormat(locale, {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+    timeZone: SG_TIMEZONE,
+  });
+  const parts = formatter.formatToParts(date);
   const getPart = (type: string) => Number(parts.find((part) => part.type === type)?.value ?? 0);
   const hours = getPart("hour");
   const minutes = getPart("minute");

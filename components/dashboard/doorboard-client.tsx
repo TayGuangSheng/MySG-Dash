@@ -6,9 +6,11 @@ import MRTNetworkCard from "@/components/dashboard/mrt-network-card";
 import SettingsOverlay from "@/components/dashboard/settings-overlay";
 import WeatherCard from "@/components/dashboard/weather-card";
 import { useBusStopContext } from "@/contexts/bus-stop-context";
+import { useTranslation } from "@/contexts/language-context";
 
 export default function DoorboardClient() {
   const { selectedStops } = useBusStopContext();
+  const { t } = useTranslation();
   const [firstStop, secondStop] = selectedStops;
 
   return (
@@ -26,13 +28,13 @@ export default function DoorboardClient() {
         </div>
         <div className="col-span-12 lg:col-span-5 xl:row-span-4">
           <BusStopCard
-            label={`Bus Stop ${firstStop.label}`}
+            label={t("dashboard.doorboard.busStopLabel", { label: firstStop.label })}
             stopId={firstStop.id}
           />
         </div>
         <div className="col-span-12 lg:col-span-5 xl:row-span-4">
           <BusStopCard
-            label={`Bus Stop ${secondStop.label}`}
+            label={t("dashboard.doorboard.busStopLabel", { label: secondStop.label })}
             stopId={secondStop.id}
           />
         </div>

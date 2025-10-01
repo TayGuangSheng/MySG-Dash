@@ -1,8 +1,8 @@
-const SG_TIMEZONE = "Asia/Singapore";
+﻿const SG_TIMEZONE = "Asia/Singapore";
 
-export function formatSingaporeTime(iso: string) {
+export function formatSingaporeTime(iso: string, locale = "en-SG") {
   const date = new Date(iso);
-  return new Intl.DateTimeFormat("en-SG", {
+  return new Intl.DateTimeFormat(locale, {
     hour: "2-digit",
     minute: "2-digit",
     hour12: false,
@@ -20,11 +20,15 @@ export function formatRelativeMinutes(minutes: number | null) {
   return `${minutes} min`;
 }
 
-export function formatNumber(value: number | null | undefined, options?: Intl.NumberFormatOptions) {
+export function formatNumber(
+  value: number | null | undefined,
+  locale = "en-SG",
+  options?: Intl.NumberFormatOptions,
+) {
   if (value === null || value === undefined || Number.isNaN(value)) {
     return "--";
   }
-  return new Intl.NumberFormat("en-SG", options).format(value);
+  return new Intl.NumberFormat(locale, options).format(value);
 }
 
 export function emphasiseForecast(forecast: string | null | undefined) {
