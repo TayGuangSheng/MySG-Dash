@@ -11,7 +11,7 @@ export const dictionaries = {
 } as const;
 
 export type SupportedLanguage = keyof typeof dictionaries;
-export type TranslationDictionary = (typeof dictionaries)["en"];
+export type TranslationDictionary = (typeof dictionaries)[SupportedLanguage];
 
 export type NestedKeyOf<T> = T extends Record<string, unknown>
   ? {
@@ -58,3 +58,4 @@ export function resolveLocale(language: SupportedLanguage) {
       return "en-SG";
   }
 }
+
