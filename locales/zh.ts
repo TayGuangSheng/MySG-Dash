@@ -151,6 +151,17 @@
         tel: "汤申-东海岸线",
       },
     },
+    lotteryCard: {
+      title: "4D 与 Toto",
+      noAutomation: "",
+      manualDescription: "需要最新结果时，可直接打开 Singapore Pools 官方 4D 结果页面——点按后会在本标签页打开。",
+      cta: "",
+      viewWebsite: "前往 4D 结果",
+      modalTitle: "4D 结果（Singapore Pools）",
+      modalBody: "系统将带你前往 Singapore Pools 的 4D 结果页面，该页面无法在仪表板内嵌显示。",
+      stayHere: "留在此处",
+      openSite: "打开结果页面",
+    },
     statusStrip: {
       weatherLabel: "天气",
       mrtLabel: "地铁",
@@ -162,7 +173,7 @@
         text: "小步伐方可走完长路。",
         author: "GS",
       },
-        consistencyBeatsIntensity: {
+      consistencyBeatsIntensity: {
         text: "在追求进步时，持之以恒胜过偶尔的爆发。",
         author: "James Clear",
       },

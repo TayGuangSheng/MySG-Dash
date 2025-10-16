@@ -151,6 +151,17 @@
         tel: "Thomson-East Coast",
       },
     },
+    lotteryCard: {
+      title: "4D & Toto",
+      noAutomation: "",
+      manualDescription: "Jump straight to the official Singapore Pools 4D results page whenever you need the latest draw—tap to open it in this tab.",
+      cta: "",
+      viewWebsite: "Go to 4D results",
+      modalTitle: "4D results (Singapore Pools)",
+      modalBody: "You'll be redirected to the Singapore Pools 4D results page, which cannot be embedded inside the dashboard.",
+      stayHere: "Stay here",
+      openSite: "Open results page",
+    },
     statusStrip: {
       weatherLabel: "Weather",
       mrtLabel: "MRT",

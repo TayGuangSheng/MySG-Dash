@@ -151,6 +151,17 @@
         tel: "Thomson-Pantai Timur",
       },
     },
+    lotteryCard: {
+      title: "4D & Toto",
+      noAutomation: "",
+      manualDescription: "Pergi terus ke halaman keputusan 4D rasmi Singapore Pools bila-bila anda mahu cabutan terkini — ketuk untuk membukanya dalam tab ini.",
+      cta: "",
+      viewWebsite: "Pergi ke keputusan 4D",
+      modalTitle: "Keputusan 4D (Singapore Pools)",
+      modalBody: "Anda akan dialihkan ke halaman keputusan 4D Singapore Pools yang tidak boleh dibenamkan dalam papan pemuka.",
+      stayHere: "Kekal di sini",
+      openSite: "Buka keputusan",
+    },
     statusStrip: {
       weatherLabel: "Cuaca",
       mrtLabel: "MRT",
@@ -191,3 +202,5 @@
 } as const;
 
 export default ms;
+
+

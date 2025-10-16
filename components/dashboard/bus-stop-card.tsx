@@ -24,7 +24,7 @@ export default function BusStopCard({ label, stopId }: { label: string; stopId: 
 
       <section className="flex-1">
         {displayedServices.length ? (
-          <div className="grid h-full grid-cols-3 content-start gap-[clamp(4px,0.6vw,8px)] auto-rows-[minmax(0,140px)]">
+          <div className="grid h-full grid-cols-3 content-start gap-[clamp(4px,0.6vw,8px)] auto-rows-[minmax(0,118px)]">
             {displayedServices.map((service) => (
               <BusService key={service.service} service={service} />
             ))}

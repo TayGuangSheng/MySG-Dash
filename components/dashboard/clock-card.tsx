@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useMemo, type CSSProperties } from "react";
 import { useTranslation } from "@/contexts/language-context";
@@ -132,6 +132,7 @@ function ClockHand({
     borderRadius: "999px",
   };
 
-  return <div className="absolute left-1/2 top-1/2 origin-bottom" style={style} />;
+  return <div className="absolute left-1/2 top-1/2 origin-bottom" style={style} suppressHydrationWarning />;
 }
+
 

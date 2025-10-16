@@ -22,7 +22,7 @@ export default function MRTNetworkCard() {
   const updated = status?.updatedAt ? formatSingaporeTime(status.updatedAt, locale) : "--:--";
 
   return (
-    <Card className="flex h-full min-h-0 flex-col gap-[clamp(12px,1.1vw,18px)] overflow-hidden p-[clamp(16px,1.5vw,28px)]">
+    <Card className="flex h-full min-h-0 w-full flex-col gap-[clamp(12px,1.1vw,18px)] overflow-hidden p-[clamp(16px,1.5vw,28px)]">
       <header className="flex min-w-0 flex-col gap-[clamp(4px,0.6vw,8px)]">
         <span className="text-[clamp(16px,2vw,24px)] font-semibold text-white">
           {t("dashboard.mrtCard.title")}
@@ -81,7 +81,7 @@ function LineTile({ line, label, color, status, statusLabel }: LineTileProps) {
     >
       <div className="flex items-center gap-2">
         <span
-          className="h-1 w-6 flex-shrink-0 rounded-full"
+          className="h-1 w-4 flex-shrink-0 rounded-full"
           style={{ background: color }}
           aria-hidden
         />

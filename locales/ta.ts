@@ -7,6 +7,17 @@
       malay: "மலாய்",
       tamil: "தமிழ்",
     },
+    lotteryCard: {
+      title: "4D & Toto",
+      noAutomation: "",
+      manualDescription: "சமீபத்திய முடிவுகளுக்காக Singapore Pools அதிகாரப்பூர்வ 4D முடிவு பக்கத்தை நேரடியாகத் திறக்கவும் — இந்த தாவலில் திறக்க தட்டவும்.",
+      cta: "",
+      viewWebsite: "4D முடிவு பக்கத்தைத் திறக்கவும்",
+      modalTitle: "4D முடிவுகள் (Singapore Pools)",
+      modalBody: "டாஷ்போர்டில் உட்சேர்க்க முடியாத Singapore Pools 4D முடிவு பக்கத்திற்குச் செலுத்தப்படுவீர்கள்.",
+      stayHere: "இங்கே இருக்கவும்",
+      openSite: "முடிவு பக்கத்தைத் திறக்கவும்",
+    },
     actions: {
       close: "மூடு",
       save: "சேமிக்க",
