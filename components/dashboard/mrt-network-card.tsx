@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Card } from "@/components/ui/card";
 import { useTranslation, type Translator } from "@/contexts/language-context";
@@ -24,8 +24,9 @@ export default function MRTNetworkCard() {
   return (
     <Card className="flex h-full min-h-0 w-full flex-col gap-[clamp(12px,1.1vw,18px)] overflow-hidden p-[clamp(16px,1.5vw,28px)]">
       <header className="flex min-w-0 flex-col gap-[clamp(4px,0.6vw,8px)]">
-        <span className="text-[clamp(16px,2vw,24px)] font-semibold text-white">
-          {t("dashboard.mrtCard.title")}
+        <span className="flex items-center gap-2 whitespace-nowrap text-[clamp(17px,2.1vw,26px)] font-semibold text-white">
+          <span aria-hidden="true">ðŸš‡</span>
+          MRT Network
         </span>
         <span className="text-[clamp(10px,1.2vw,14px)] font-normal text-white/70">
           {t("dashboard.mrtCard.updated", { time: updated })}
@@ -33,7 +34,7 @@ export default function MRTNetworkCard() {
       </header>
 
       <section className="flex-1 min-h-0 overflow-hidden">
-        <div className="grid h-full min-h-0 auto-rows-[minmax(46px,1fr)] grid-cols-1 gap-[clamp(8px,0.8vw,12px)] md:grid-cols-2">
+        <div className="grid h-full min-h-0 auto-rows-[minmax(52px,1fr)] grid-cols-1 gap-[clamp(8px,0.8vw,12px)] md:grid-cols-2">
           {LINES.map((line) => {
             const record = byLine.get(line.id);
             const rawStatus = record?.status ?? "Normal";
@@ -77,7 +78,7 @@ function LineTile({ line, label, color, status, statusLabel }: LineTileProps) {
   return (
     <article
       aria-label={`${line} ${statusLabel}`}
-      className="flex h-full min-h-0 flex-col justify-between gap-1.2 rounded-xl border border-white/12 bg-white/5 px-[clamp(10px,0.9vw,14px)] py-[clamp(6px,0.5vw,14px)] shadow-inner"
+      className="flex h-full min-h-0 flex-col justify-between gap-1.5 rounded-xl border border-white/12 bg-white/5 px-[clamp(12px,1vw,16px)] py-[clamp(8px,0.7vw,16px)] shadow-inner"
     >
       <div className="flex items-center gap-2">
         <span
@@ -85,12 +86,12 @@ function LineTile({ line, label, color, status, statusLabel }: LineTileProps) {
           style={{ background: color }}
           aria-hidden
         />
-        <span className="truncate text-[clamp(9px,0.85vw,11px)] font-semibold uppercase tracking-[0.24em] text-white">
+        <span className="truncate text-[clamp(11px,1vw,13px)] font-semibold uppercase tracking-[0.22em] text-white">
           {line}
         </span>
       </div>
 
-      <p className={`truncate text-[clamp(8px,0.8vw,10px)] font-semibold ${statusColor(status)}`}>
+      <p className={`truncate text-[clamp(10px,0.9vw,12px)] font-semibold ${statusColor(status)}`}>
         {statusLabel}
       </p>
     </article>
@@ -122,3 +123,4 @@ function translateStatus(status: TrainStatus, t: Translator) {
       return status;
   }
 }
+
