@@ -6,23 +6,29 @@
 };
 
 export const PRESET_LOCATIONS: readonly PresetLocation[] = [
-  { id: "boon-keng", label: "Boon Keng", lat: 1.3191, lon: 103.8618 },
-  { id: "lorong-chuan", label: "Lorong Chuan", lat: 1.3485, lon: 103.8643 },
-  { id: "toa-payoh", label: "Toa Payoh", lat: 1.3333, lon: 103.8500 },
-  { id: "tampines", label: "Tampines", lat: 1.3536, lon: 103.9458 },
-  { id: "jurong-east", label: "Jurong East", lat: 1.3331, lon: 103.7420 },
-  { id: "woodlands", label: "Woodlands", lat: 1.4380, lon: 103.7881 },
-  { id: "clementi", label: "Clementi", lat: 1.3151, lon: 103.7624 },
-  { id: "punggol", label: "Punggol", lat: 1.4053, lon: 103.9020 },
-  { id: "bukit-panjang", label: "Bukit Panjang", lat: 1.3786, lon: 103.7616 },
+  { id: "ang-mo-kio", label: "Ang Mo Kio", lat: 1.3691, lon: 103.8454 },
+  { id: "bedok", label: "Bedok", lat: 1.3246, lon: 103.9305 },
   { id: "bishan", label: "Bishan", lat: 1.3508, lon: 103.8480 },
-  { id: "serangoon", label: "Serangoon", lat: 1.3526, lon: 103.8700 },
-  { id: "yishun", label: "Yishun", lat: 1.4295, lon: 103.8350 },
+  { id: "boon-keng", label: "Boon Keng", lat: 1.3191, lon: 103.8618 },
+  { id: "bukit-panjang", label: "Bukit Panjang", lat: 1.3786, lon: 103.7616 },
   { id: "bukit-timah", label: "Bukit Timah", lat: 1.3294, lon: 103.8021 },
-  { id: "pasir-ris", label: "Pasir Ris", lat: 1.3721, lon: 103.9493 },
   { id: "changi-airport", label: "Changi Airport", lat: 1.3570, lon: 103.9886 },
+  { id: "clementi", label: "Clementi", lat: 1.3151, lon: 103.7624 },
+  { id: "hougang", label: "Hougang", lat: 1.3711, lon: 103.8860 },
+  { id: "jurong-east", label: "Jurong East", lat: 1.3331, lon: 103.7420 },
+  { id: "kallang", label: "Kallang", lat: 1.3112, lon: 103.8660 },
+  { id: "lorong-chuan", label: "Lorong Chuan", lat: 1.3485, lon: 103.8643 },
   { id: "marina-bay", label: "Marina Bay", lat: 1.2823, lon: 103.8585 },
-  { id: "sentosa", label: "Sentosa", lat: 1.2494, lon: 103.8303 }
+  { id: "marine-parade", label: "Marine Parade", lat: 1.3037, lon: 103.9058 },
+  { id: "pasir-ris", label: "Pasir Ris", lat: 1.3721, lon: 103.9493 },
+  { id: "punggol", label: "Punggol", lat: 1.4053, lon: 103.9020 },
+  { id: "queenstown", label: "Queenstown", lat: 1.2941, lon: 103.8053 },
+  { id: "sengkang", label: "Sengkang", lat: 1.3914, lon: 103.8953 },
+  { id: "sentosa", label: "Sentosa", lat: 1.2494, lon: 103.8303 },
+  { id: "tampines", label: "Tampines", lat: 1.3536, lon: 103.9458 },
+  { id: "toa-payoh", label: "Toa Payoh", lat: 1.3333, lon: 103.8500 },
+  { id: "woodlands", label: "Woodlands", lat: 1.4380, lon: 103.7881 },
+  { id: "yishun", label: "Yishun", lat: 1.4295, lon: 103.8350 }
 ] as const;
 
 export type WeatherLocationSelection =

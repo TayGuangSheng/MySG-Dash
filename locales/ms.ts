@@ -162,6 +162,17 @@
       stayHere: "Kekal di sini",
       openSite: "Buka keputusan",
     },
+    memoriesCard: {
+      title: "Kenangan",
+      modalTitle: "Kenangan keluarga",
+      modalSubtitle: "Satu ruang mesra untuk foto, pesanan suara dan sapaan ringkas daripada keluarga.",
+      placeholder: "Tambah foto",
+      seenOn: "Dilihat pada {{date}}",
+      hint: "Letakkan foto baharu dalam folder /public/memories atau kemas kini sumber data untuk menyegarkan galeri ini.",
+    },
+    settingsCard: {
+      title: "Tetapan",
+    },
     statusStrip: {
       weatherLabel: "Cuaca",
       mrtLabel: "MRT",
@@ -202,5 +213,7 @@
 } as const;
 
 export default ms;
+
+
 
 

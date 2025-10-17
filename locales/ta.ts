@@ -7,17 +7,6 @@
       malay: "மலாய்",
       tamil: "தமிழ்",
     },
-    lotteryCard: {
-      title: "4D & Toto",
-      noAutomation: "",
-      manualDescription: "சமீபத்திய முடிவுகளுக்காக Singapore Pools அதிகாரப்பூர்வ 4D முடிவு பக்கத்தை நேரடியாகத் திறக்கவும் — இந்த தாவலில் திறக்க தட்டவும்.",
-      cta: "",
-      viewWebsite: "4D முடிவு பக்கத்தைத் திறக்கவும்",
-      modalTitle: "4D முடிவுகள் (Singapore Pools)",
-      modalBody: "டாஷ்போர்டில் உட்சேர்க்க முடியாத Singapore Pools 4D முடிவு பக்கத்திற்குச் செலுத்தப்படுவீர்கள்.",
-      stayHere: "இங்கே இருக்கவும்",
-      openSite: "முடிவு பக்கத்தைத் திறக்கவும்",
-    },
     actions: {
       close: "மூடு",
       save: "சேமிக்க",
@@ -162,6 +151,28 @@
         tel: "தாம்சன்-கிழக்கு கடற்கரை",
       },
     },
+    lotteryCard: {
+      title: "4D & Toto",
+      noAutomation: "",
+      manualDescription: "சமீபத்திய முடிவுகளைப் பார்க்க Singapore Pools 4D முடிவு பக்கத்தைத் திறக்கவும் — இந்த தாவலில் திறக்க தட்டுங்கள்.",
+      cta: "",
+      viewWebsite: "4D முடிவு பக்கத்திற்குச் செல்லவும்",
+      modalTitle: "4D முடிவுகள் (Singapore Pools)",
+      modalBody: "இந்த டாஷ்போர்டில் உட்சேர்க்க முடியாத Singapore Pools 4D முடிவு பக்கத்திற்குச் செல்கிறீர்கள்.",
+      stayHere: "இங்கே இருங்கள்",
+      openSite: "முடிவு பக்கத்தைத் திறக்கவும்",
+    },
+    memoriesCard: {
+      title: "நினைவுகள்",
+      modalTitle: "குடும்ப நினைவுகள்",
+      modalSubtitle: "புகைப்படங்கள், குரல் குறிப்புகள், அன்பான செய்திகள்—all in one cosy place.",
+      placeholder: "புகைப்படத்தைச் சேர்க்கவும்",
+      seenOn: "{{date}} அன்று பதிவு",
+      hint: "புதிய புகைப்படங்களை /public/memories கோப்புறையில் இடுங்கள் அல்லது தரவூற்றை மாற்றி கேலரியைப் புதுப்பிக்கவும்.",
+    },
+    settingsCard: {
+      title: "அமைப்புகள்",
+    },
     statusStrip: {
       weatherLabel: "வானிலை",
       mrtLabel: "எம்ஆர்டி",
@@ -202,3 +213,7 @@
 } as const;
 
 export default ta;
+
+
+
+

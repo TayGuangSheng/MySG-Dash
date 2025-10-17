@@ -162,6 +162,17 @@
       stayHere: "留在此处",
       openSite: "打开结果页面",
     },
+    memoriesCard: {
+      title: "家庭回忆",
+      modalTitle: "家庭回忆",
+      modalSubtitle: "在这里欣赏家人的照片、语音与日常问候，让客厅更有温度。",
+      placeholder: "添加照片",
+      seenOn: "记录于 {{date}}",
+      hint: "将新照片放入 /public/memories 文件夹，或更新数据来源即可刷新画廊。",
+    },
+    settingsCard: {
+      title: "设置",
+    },
     statusStrip: {
       weatherLabel: "天气",
       mrtLabel: "地铁",
@@ -202,3 +213,4 @@
 } as const;
 
 export default zh;
+

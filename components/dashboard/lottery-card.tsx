@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, type KeyboardEvent } from "react";
 import { Card, CardBody, CardFooter, CardHeader } from "@/components/ui/card";
@@ -32,30 +32,13 @@ export default function LotteryCard() {
         tabIndex={0}
         onClick={handleActivate}
         onKeyDown={handleKeyDown}
-        className="flex w-full cursor-pointer flex-col gap-[clamp(12px,1.2vw,18px)] p-[clamp(18px,1.8vw,26px)] transition hover:shadow-[0_0_0_2px_rgba(255,255,255,0.12)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white/80"
-        aria-describedby="lottery-card-description"
+        className="flex h-full min-h-[72px] w-full cursor-pointer flex-col items-start justify-center gap-1.5 p-[clamp(12px,1vw,18px)] transition hover:shadow-[0_0_0_2px_rgba(255,255,255,0.12)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white/80"
+        aria-label={t("dashboard.lotteryCard.title")}
       >
-        <CardHeader className="flex-col items-start">
-          <span className="text-[clamp(16px,2vw,24px)] font-semibold text-white">
-            {t("dashboard.lotteryCard.title")}
-          </span>
-          <span className="text-[clamp(12px,1.4vw,16px)] text-white/60">
-            {t("dashboard.lotteryCard.noAutomation")}
-          </span>
-        </CardHeader>
-
-        <CardBody className="min-h-0 gap-[clamp(10px,1vw,14px)] text-white">
-          <p className="text-[clamp(12px,1.3vw,16px)] text-white/75">
-            {t("dashboard.lotteryCard.manualDescription")}
-          </p>
-          <p id="lottery-card-description" className="text-[clamp(11px,1.2vw,14px)] text-white/55">
-            {t("dashboard.lotteryCard.cta")}
-          </p>
-        </CardBody>
-
-        <CardFooter className="justify-end text-[clamp(11px,1.2vw,14px)] text-white/60">
-          <span>{t("dashboard.lotteryCard.viewWebsite")}</span>
-        </CardFooter>
+        <span className="flex items-center gap-2 text-[clamp(16px,2vw,24px)] font-semibold text-white">
+          <span aria-hidden="true">{"\uD83C\uDFB2"}</span>
+          {t("dashboard.lotteryCard.title")}
+        </span>
       </Card>
 
       {open ? (
@@ -106,3 +89,4 @@ export default function LotteryCard() {
     </>
   );
 }
+

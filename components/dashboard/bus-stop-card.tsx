@@ -16,7 +16,10 @@ export default function BusStopCard({ label, stopId }: { label: string; stopId: 
   return (
     <Card className="flex flex-col gap-[clamp(16px,1.4vw,24px)] p-[clamp(20px,1.8vw,32px)]">
       <header className="flex min-w-0 flex-wrap items-start justify-between gap-[clamp(8px,1vw,14px)]">
-        <span className="truncate text-[clamp(16px,2vw,24px)] font-semibold text-white">{label}</span>
+        <span className="flex items-center gap-2 truncate text-[clamp(16px,2vw,24px)] font-semibold text-white">
+          <span aria-hidden="true">{"\uD83D\uDE8C"}</span>
+          <span className="truncate">{label}</span>
+        </span>
         <span className="text-[clamp(10px,1.2vw,14px)] font-normal text-white/70">
           {t("dashboard.busCard.updated", { time: updatedTime })}
         </span>
