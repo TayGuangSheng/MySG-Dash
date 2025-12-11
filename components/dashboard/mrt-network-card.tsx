@@ -86,12 +86,12 @@ function LineTile({ line, label, color, status, statusLabel }: LineTileProps) {
           style={{ background: color }}
           aria-hidden
         />
-        <span className="truncate text-[clamp(9px,0.85vw,11px)] font-semibold uppercase tracking-[0.24em] text-white">
+        <span className="truncate text-[clamp(8px,0.78vw,10px)] font-semibold uppercase tracking-[0.24em] text-white">
           {line}
         </span>
       </div>
 
-      <p className={`truncate text-[clamp(8px,0.8vw,10px)] font-semibold ${statusColor(status)}`}>
+      <p className={`truncate text-[clamp(9px,0.85vw,11px)] font-semibold leading-tight ${statusColor(status)}`}>
         {statusLabel}
       </p>
     </article>
@@ -101,11 +101,11 @@ function LineTile({ line, label, color, status, statusLabel }: LineTileProps) {
 function statusColor(status: TrainStatus) {
   switch (status) {
     case "Normal":
-      return "text-emerald-400";
+      return "text-emerald-300";
     case "Delay":
-      return "text-amber-300";
+      return "text-amber-200";
     case "Disrupted":
-      return "text-rose-400";
+      return "text-rose-300";
     default:
       return "text-white";
   }

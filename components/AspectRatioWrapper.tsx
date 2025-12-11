@@ -11,6 +11,9 @@ type AspectRatioWrapperProps = {
 };
 
 const BASE_UNIT = 100;
+const MIN_VIEWPORT_PADDING = 12;
+const VIEWPORT_PADDING_RATIO = 0.02;
+const MAX_PADDING_RATIO = 0.06;
 
 export default function AspectRatioWrapper({
   ratioWidth = 16,
@@ -30,8 +33,15 @@ export default function AspectRatioWrapper({
 
     const fit = () => {
       const { innerWidth, innerHeight } = window;
-      const scale = Math.min(innerWidth / designWidth, innerHeight / designHeight);
+      const basePadding = Math.min(innerWidth, innerHeight) * VIEWPORT_PADDING_RATIO;
+      const maxPadding = Math.min(innerWidth, innerHeight) * MAX_PADDING_RATIO;
+      const viewportPadding = Math.min(Math.max(basePadding, MIN_VIEWPORT_PADDING), maxPadding);
+      const availableWidth = Math.max(innerWidth - viewportPadding * 2, 0);
+      const availableHeight = Math.max(innerHeight - viewportPadding * 2, 0);
+      const scale = Math.min(availableWidth / designWidth, availableHeight / designHeight);
+
       node.style.setProperty("--aspect-scale", scale.toString());
+      node.style.setProperty("--aspect-padding", `${viewportPadding}px`);
     };
 
     fit();
@@ -47,9 +57,12 @@ export default function AspectRatioWrapper({
   }, [designWidth, designHeight]);
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center overflow-hidden">
+    <div
+      ref={containerRef}
+      className="fixed inset-0 flex items-center justify-center overflow-hidden"
+      style={{ padding: "var(--aspect-padding, 0px)" }}
+    >
       <div
-        ref={containerRef}
         className={cn(
           "origin-center",
           "[transform:scale(var(--aspect-scale,1))]",

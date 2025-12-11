@@ -31,7 +31,10 @@ export default function RootLayout({
       className={`h-full ${GeistSans.variable} ${GeistMono.variable}`}
       suppressHydrationWarning
     >
-      <body className="h-full overflow-hidden bg-[color:var(--theme-background)] text-[color:var(--theme-foreground)]">
+      <body
+        className="h-full overflow-hidden bg-[color:var(--theme-background)] text-[color:var(--theme-foreground)]"
+        suppressHydrationWarning
+      >
         <Providers>{children}</Providers>
       </body>
     </html>
