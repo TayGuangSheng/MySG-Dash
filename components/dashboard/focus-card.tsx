@@ -395,7 +395,7 @@ export default function FocusCard() {
 
                   <section className="space-y-3">
                     <h3 className="text-[clamp(0.95rem,1.2vw,1.2rem)] font-semibold text-white/85">
-                      {tf("dashboard.focusCard.ambientTitle", "Ambient info")}
+                      {t("dashboard.focusCard.ambientTitle") || "Ambient info"}
                     </h3>
                     <div className="grid gap-3 md:grid-cols-2">
                       <div className="rounded-2xl border border-white/10 bg-white/5 p-4">

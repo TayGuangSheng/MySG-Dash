@@ -182,6 +182,9 @@
         holding: "等待",
         arrived: "抵达",
       },
+      ambientTitle: "周边信息",
+      originLocalTime: "当地时间（出发）",
+      destinationLocalTime: "当地时间（到达）",
     },
 
     settingsCard: {

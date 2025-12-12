@@ -182,6 +182,9 @@
         holding: "நிறுத்தம்",
         arrived: "இறங்கியது",
       },
+      ambientTitle: "சுற்றுப்புற தகவல்",
+      originLocalTime: "உள்ளூர் நேரம் (புறப்பு)",
+      destinationLocalTime: "உள்ளூர் நேரம் (இறங்கு)",
     },
 
     settingsCard: {
@@ -227,4 +230,3 @@
 } as const;
 
 export default ta;
-

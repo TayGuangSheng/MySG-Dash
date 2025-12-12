@@ -182,6 +182,9 @@
         holding: "Holding",
         arrived: "Arrived",
       },
+      ambientTitle: "Ambient info",
+      originLocalTime: "Local time (depart)",
+      destinationLocalTime: "Local time (arrive)",
     },
     settingsCard: {
       title: "Settings",

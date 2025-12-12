@@ -182,6 +182,9 @@
         holding: "Pegangan",
         arrived: "Tiba",
       },
+      ambientTitle: "Maklumat sekitar",
+      originLocalTime: "Masa tempatan (berlepas)",
+      destinationLocalTime: "Masa tempatan (tiba)",
     },
     settingsCard: {
       title: "Tetapan",
