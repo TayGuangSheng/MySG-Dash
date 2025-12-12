@@ -161,20 +161,26 @@
       totoShort: "Toto",
     },
     focusCard: {
-      title: "கவனம்",
-      subtitle: "கவனம் நேரத்தை தொடங்கி, முடிந்ததும் ஓய்வு நினைவூட்டு பெறுங்கள்.",
-      durationLabel: "நேரம்",
+      title: "பறப்பு கவனம்",
+      cockpitTitle: "Cockpit",
+      subtitle: "பறந்து கவனம், இறங்கிப் ஓய்வு.",
+      routeLabel: "பறக்கும் பாதை",
+      fromLabel: "இங்கிருந்து புறப்படு",
+      toLabel: "இங்கே இறங்கு",
+      flightDurationLabel: "பறப்பு நேரம் ~{{value}} நிமி",
+      flightUnavailable: "இந்த பாதை இல்லை. வேறொரு ஜோடியைத் தேர்ந்தெடுக்கவும்.",
+      controls: "பறப்பு கட்டுப்பாடு",
       minutes: "{{value}} நிமி",
-      start: "தொடங்கு",
-      pause: "இடைநிறுத்து",
-      resume: "தொடர்த்து",
-      reset: "மீட்டமை",
-      breakMessage: "நேரம் முடிந்தது. சிறிது ஓய்வு எடுக்கவும்.",
+      depart: "புறப்படு",
+      hold: "இடைநிறுத்து",
+      resumeFlight: "பறப்பை தொடர்க",
+      divert: "ரத்து / மீட்டமை",
+      breakMessage: "இறங்கியது. சிறிது ஓய்வு எடுக்கவும்.",
       status: {
-        idle: "தயார்",
-        running: "நடைபெறுகிறது",
-        paused: "இடைநிறுத்தப்பட்டது",
-        done: "முடிந்தது",
+        preflight: "தயார் புறப்பு",
+        enroute: "பறந்து கொண்டிருக்கிறது",
+        holding: "நிறுத்தம்",
+        arrived: "இறங்கியது",
       },
     },
 
@@ -221,6 +227,4 @@
 } as const;
 
 export default ta;
-
-
 
