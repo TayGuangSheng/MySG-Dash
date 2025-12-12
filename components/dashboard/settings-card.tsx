@@ -235,33 +235,31 @@ function SettingsModal({ onClose }: { onClose: () => void }) {
             </h3>
             <div className="grid gap-3 md:grid-cols-2">
               <div className="space-y-2 rounded-2xl border border-white/15 bg-white/5 p-4">
-                <label className="text-[clamp(0.75rem,0.9vw,1rem)] text-white/70">
-                  {t("dashboard.settings.weatherPresetLabel")}
-                </label>
-                <select
-                  value={currentLocationId}
-                  onChange={(event) => {
-                    const value = event.target.value;
-                    if (value === "custom") return;
-                    const preset = presets.find((item) => item.id === value);
-                    if (preset) {
-                      setSelection({ type: "preset", location: preset });
-                    }
-                  }}
-                  className="rounded-xl border border-white/20 bg-black/30 px-3 py-2 text-white"
-                >
-                  {presets.map((preset) => (
-                    <option key={preset.id} value={preset.id}>
-                      {preset.label}
-                    </option>
-                  ))}
-                  <option value="custom">{t("dashboard.settings.weatherCustomOption")}</option>
-                </select>
+                <p className="text-[clamp(0.75rem,0.9vw,1rem)] text-white/70">{t("dashboard.settings.weatherPresetLabel")}</p>
+                <div className="flex items-center gap-3">
+                  <select
+                    value={currentLocationId}
+                    onChange={(event) => {
+                      const value = event.target.value;
+                      if (value === "custom") return;
+                      const preset = presets.find((item) => item.id === value);
+                      if (preset) {
+                        setSelection({ type: "preset", location: preset });
+                      }
+                    }}
+                    className="flex-1 rounded-xl border border-white/20 bg-black/30 px-3 py-2 text-white"
+                  >
+                    {presets.map((preset) => (
+                      <option key={preset.id} value={preset.id}>
+                        {preset.label}
+                      </option>
+                    ))}
+                    <option value="custom">{t("dashboard.settings.weatherCustomOption")}</option>
+                  </select>
+                </div>
               </div>
               <div className="space-y-2 rounded-2xl border border-white/15 bg-white/5 p-4">
-                <label className="text-[clamp(0.75rem,0.9vw,1rem)] text-white/70">
-                  {t("dashboard.settings.gpsLabel")}
-                </label>
+                <p className="text-[clamp(0.75rem,0.9vw,1rem)] text-white/70">{t("dashboard.settings.gpsLabel")}</p>
                 <div className="flex items-center gap-2">
                   <input
                     value={manualInput}

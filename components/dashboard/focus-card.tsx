@@ -365,31 +365,33 @@ export default function FocusCard() {
                     <h3 className="text-[clamp(0.95rem,1.2vw,1.2rem)] font-semibold text-white/85">
                       {tf("dashboard.focusCard.controls", "Flight controls")}
                     </h3>
-                    <div className="flex flex-wrap items-center gap-2">
-                      {status === "running" ? (
+                    <div className="flex flex-wrap items-center gap-3">
+                      {status === "idle" || status === "done" ? (
                         <button
                           type="button"
-                          onClick={handlePause}
-                          className="rounded-full border border-white/40 bg-white/10 px-4 py-2 text-[clamp(12px,1.2vw,14px)] font-semibold text-white transition hover:border-white/60 hover:bg-white/15"
+                          onClick={handleStart}
+                          className="rounded-full border border-white/60 bg-white/15 px-5 py-2.5 text-[clamp(13px,1.3vw,15px)] font-semibold text-white shadow-[0_0_0_1px_rgba(255,255,255,0.2)] transition hover:border-white/80 hover:bg-white/20"
                         >
-                          {t("dashboard.focusCard.hold")}
+                          {t("dashboard.focusCard.depart")}
                         </button>
                       ) : (
-                        <button
-                          type="button"
-                          onClick={status === "paused" ? handleResume : handleStart}
-                          className="rounded-full border border-white/40 bg-white/10 px-4 py-2 text-[clamp(12px,1.2vw,14px)] font-semibold text-white transition hover:border-white/60 hover:bg-white/15"
-                        >
-                          {status === "paused" ? t("dashboard.focusCard.resumeFlight") : t("dashboard.focusCard.depart")}
-                        </button>
+                        <div className="flex gap-2">
+                          <button
+                            type="button"
+                            onClick={status === "paused" ? handleResume : handlePause}
+                            className="rounded-full border border-white/60 bg-white/15 px-4 py-2 text-[clamp(12px,1.2vw,14px)] font-semibold text-white transition hover:border-white/80 hover:bg-white/20"
+                          >
+                            {status === "paused" ? t("dashboard.focusCard.resumeFlight") : t("dashboard.focusCard.hold")}
+                          </button>
+                          <button
+                            type="button"
+                            onClick={handleReset}
+                            className="rounded-full border border-white/30 px-4 py-2 text-[clamp(12px,1.2vw,14px)] text-white/85 transition hover:border-white/50 hover:text-white"
+                          >
+                            {t("dashboard.focusCard.divert")}
+                          </button>
+                        </div>
                       )}
-                      <button
-                        type="button"
-                        onClick={handleReset}
-                        className="rounded-full border border-white/25 px-4 py-2 text-[clamp(12px,1.2vw,14px)] text-white/80 transition hover:border-white/50 hover:text-white"
-                      >
-                        {t("dashboard.focusCard.divert")}
-                      </button>
                     </div>
                   </section>
 
