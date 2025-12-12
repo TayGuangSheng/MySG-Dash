@@ -23,26 +23,26 @@ export default function DoorboardClient() {
 
   return (
     <>
-      <div className="grid h-full w-full grid-cols-12 auto-rows-[1fr] gap-2">
-        <div className="col-span-12 xl:col-span-5 xl:row-span-2">
+      <div className="grid w-full grid-cols-1 gap-2 xl:h-full xl:grid-cols-12 xl:auto-rows-[1fr]">
+        <div className="col-span-1 xl:col-span-5 xl:row-span-2">
           <ClockCard />
         </div>
-        <div className="col-span-12 xl:col-span-7 xl:row-span-2">
+        <div className="col-span-1 xl:col-span-7 xl:row-span-2">
           <WeatherCard />
         </div>
-        <div className="col-span-12 lg:col-span-2 xl:row-span-4 grid gap-2 xl:min-h-0" style={{ gridTemplateRows: "2fr repeat(3, minmax(0, 0.6fr))" }}>
+        <div className="col-span-1 xl:col-span-2 xl:row-span-4 grid gap-2 xl:min-h-0">
           <div className="flex w-full xl:min-h-0"><MRTNetworkCard /></div>
           <div className="flex w-full xl:min-h-0"><LotteryCard /></div>
           <div className="flex w-full xl:min-h-0"><FocusCard /></div>
           <div className="flex w-full xl:min-h-0"><SettingsCard /></div>
         </div>
-        <div className="col-span-12 lg:col-span-5 xl:row-span-4">
+        <div className="col-span-1 xl:col-span-5 xl:row-span-4">
           <BusStopCard
             label={resolveLabel(firstStop)}
             stopId={firstStop.id}
           />
         </div>
-        <div className="col-span-12 lg:col-span-5 xl:row-span-4">
+        <div className="col-span-1 xl:col-span-5 xl:row-span-4">
           <BusStopCard
             label={resolveLabel(secondStop)}
             stopId={secondStop.id}

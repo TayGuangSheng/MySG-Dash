@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 type AspectRatioWrapperProps = {
@@ -14,6 +14,7 @@ const BASE_UNIT = 100;
 const MIN_VIEWPORT_PADDING = 12;
 const VIEWPORT_PADDING_RATIO = 0.02;
 const MAX_PADDING_RATIO = 0.06;
+const MOBILE_BREAKPOINT = 900;
 
 export default function AspectRatioWrapper({
   ratioWidth = 16,
@@ -22,6 +23,7 @@ export default function AspectRatioWrapper({
   children,
 }: AspectRatioWrapperProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
   const clampedWidth = Math.max(ratioWidth, 1);
   const clampedHeight = Math.max(ratioHeight, 1);
   const designWidth = clampedWidth * BASE_UNIT;
@@ -33,6 +35,7 @@ export default function AspectRatioWrapper({
 
     const fit = () => {
       const { innerWidth, innerHeight } = window;
+      setIsMobile(innerWidth < MOBILE_BREAKPOINT);
       const basePadding = Math.min(innerWidth, innerHeight) * VIEWPORT_PADDING_RATIO;
       const maxPadding = Math.min(innerWidth, innerHeight) * MAX_PADDING_RATIO;
       const viewportPadding = Math.min(Math.max(basePadding, MIN_VIEWPORT_PADDING), maxPadding);
@@ -59,18 +62,22 @@ export default function AspectRatioWrapper({
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 flex items-center justify-center overflow-hidden"
+      className={cn(
+        "fixed inset-0 flex overflow-auto",
+        isMobile ? "items-start justify-center" : "items-center justify-center",
+      )}
       style={{ padding: "var(--aspect-padding, 0px)" }}
     >
       <div
         className={cn(
           "origin-center",
-          "[transform:scale(var(--aspect-scale,1))]",
+          !isMobile && "[transform:scale(var(--aspect-scale,1))]",
           className,
         )}
         style={{
-          width: `${designWidth}px`,
-          height: `${designHeight}px`,
+          width: isMobile ? "100%" : `${designWidth}px`,
+          height: isMobile ? "auto" : `${designHeight}px`,
+          transform: isMobile ? "none" : undefined,
         }}
       >
         {children}

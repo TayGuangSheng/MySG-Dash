@@ -30,7 +30,7 @@ export default function SettingsCard() {
             setOpen(true);
           }
         }}
-        className="flex h-full min-h-[72px] w-full cursor-pointer flex-col justify-center gap-1.5 p-[clamp(12px,1vw,18px)] transition hover:shadow-[0_0_0_2px_rgba(255,255,255,0.12)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white/80"
+        className="flex h-full min-h-[56px] sm:min-h-[72px] w-full cursor-pointer flex-col justify-center gap-1.5 p-[clamp(12px,1vw,18px)] transition hover:shadow-[0_0_0_2px_rgba(255,255,255,0.12)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white/80"
         aria-label={t("dashboard.settingsCard.title")}
       >
         <span className="flex items-center gap-2 text-[clamp(16px,2vw,24px)] font-semibold text-white">
