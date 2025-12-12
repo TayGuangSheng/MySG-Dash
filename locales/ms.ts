@@ -153,22 +153,29 @@
     },
     lotteryCard: {
       title: "4D & Toto",
-      noAutomation: "",
-      manualDescription: "Pergi terus ke halaman keputusan 4D rasmi Singapore Pools bila-bila anda mahu cabutan terkini — ketuk untuk membukanya dalam tab ini.",
-      cta: "",
-      viewWebsite: "Pergi ke keputusan 4D",
-      modalTitle: "Keputusan 4D (Singapore Pools)",
-      modalBody: "Anda akan dialihkan ke halaman keputusan 4D Singapore Pools yang tidak boleh dibenamkan dalam papan pemuka.",
-      stayHere: "Kekal di sini",
-      openSite: "Buka keputusan",
+      fourDTitle: "Keputusan 4D",
+      fourDDescription: "Buka halaman keputusan 4D rasmi Singapore Pools.",
+      fourDShort: "4D",
+      totoTitle: "Keputusan Toto",
+      totoDescription: "Buka halaman keputusan Toto rasmi Singapore Pools.",
+      totoShort: "Toto",
     },
-    memoriesCard: {
-      title: "Kenangan",
-      modalTitle: "Kenangan keluarga",
-      modalSubtitle: "Satu ruang mesra untuk foto, pesanan suara dan sapaan ringkas daripada keluarga.",
-      placeholder: "Tambah foto",
-      seenOn: "Dilihat pada {{date}}",
-      hint: "Letakkan foto baharu dalam folder /public/memories atau kemas kini sumber data untuk menyegarkan galeri ini.",
+    focusCard: {
+      title: "Fokus",
+      subtitle: "Mulakan pemasa fokus dan dapat peringatan untuk rehat.",
+      durationLabel: "Tempoh",
+      minutes: "{{value}} min",
+      start: "Mula",
+      pause: "Jeda",
+      resume: "Sambung",
+      reset: "Tetap semula",
+      breakMessage: "Masa tamat. Rehat sebentar.",
+      status: {
+        idle: "Sedia",
+        running: "Sedang berjalan",
+        paused: "Dijeda",
+        done: "Selesai",
+      },
     },
     settingsCard: {
       title: "Tetapan",
@@ -213,7 +220,3 @@
 } as const;
 
 export default ms;
-
-
-
-

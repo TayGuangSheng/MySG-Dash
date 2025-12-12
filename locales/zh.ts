@@ -153,23 +153,31 @@
     },
     lotteryCard: {
       title: "4D 与 Toto",
-      noAutomation: "",
-      manualDescription: "需要最新结果时，可直接打开 Singapore Pools 官方 4D 结果页面——点按后会在本标签页打开。",
-      cta: "",
-      viewWebsite: "前往 4D 结果",
-      modalTitle: "4D 结果（Singapore Pools）",
-      modalBody: "系统将带你前往 Singapore Pools 的 4D 结果页面，该页面无法在仪表板内嵌显示。",
-      stayHere: "留在此处",
-      openSite: "打开结果页面",
+      fourDTitle: "4D 结果",
+      fourDDescription: "打开新加坡博彩的官方 4D 结果页。",
+      fourDShort: "4D",
+      totoTitle: "Toto 结果",
+      totoDescription: "打开新加坡博彩 Toto 结果页。",
+      totoShort: "Toto",
     },
-    memoriesCard: {
-      title: "家庭回忆",
-      modalTitle: "家庭回忆",
-      modalSubtitle: "在这里欣赏家人的照片、语音与日常问候，让客厅更有温度。",
-      placeholder: "添加照片",
-      seenOn: "记录于 {{date}}",
-      hint: "将新照片放入 /public/memories 文件夹，或更新数据来源即可刷新画廊。",
+    focusCard: {
+      title: "专注",
+      subtitle: "开始专注计时，时间到会提醒休息。",
+      durationLabel: "时长",
+      minutes: "{{value}} 分钟",
+      start: "开始",
+      pause: "暂停",
+      resume: "继续",
+      reset: "重置",
+      breakMessage: "时间到，休息一下吧。",
+      status: {
+        idle: "准备就绪",
+        running: "进行中",
+        paused: "已暂停",
+        done: "完成",
+      },
     },
+
     settingsCard: {
       title: "设置",
     },
@@ -213,4 +221,3 @@
 } as const;
 
 export default zh;
-

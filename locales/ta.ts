@@ -153,23 +153,31 @@
     },
     lotteryCard: {
       title: "4D & Toto",
-      noAutomation: "",
-      manualDescription: "சமீபத்திய முடிவுகளைப் பார்க்க Singapore Pools 4D முடிவு பக்கத்தைத் திறக்கவும் — இந்த தாவலில் திறக்க தட்டுங்கள்.",
-      cta: "",
-      viewWebsite: "4D முடிவு பக்கத்திற்குச் செல்லவும்",
-      modalTitle: "4D முடிவுகள் (Singapore Pools)",
-      modalBody: "இந்த டாஷ்போர்டில் உட்சேர்க்க முடியாத Singapore Pools 4D முடிவு பக்கத்திற்குச் செல்கிறீர்கள்.",
-      stayHere: "இங்கே இருங்கள்",
-      openSite: "முடிவு பக்கத்தைத் திறக்கவும்",
+      fourDTitle: "4D முடிவுகள்",
+      fourDDescription: "Singapore Pools 4D முடிவு பக்கத்தை திறக்கிறது.",
+      fourDShort: "4D",
+      totoTitle: "Toto முடிவுகள்",
+      totoDescription: "Singapore Pools Toto முடிவு பக்கத்தை திறக்கிறது.",
+      totoShort: "Toto",
     },
-    memoriesCard: {
-      title: "நினைவுகள்",
-      modalTitle: "குடும்ப நினைவுகள்",
-      modalSubtitle: "புகைப்படங்கள், குரல் குறிப்புகள், அன்பான செய்திகள்—all in one cosy place.",
-      placeholder: "புகைப்படத்தைச் சேர்க்கவும்",
-      seenOn: "{{date}} அன்று பதிவு",
-      hint: "புதிய புகைப்படங்களை /public/memories கோப்புறையில் இடுங்கள் அல்லது தரவூற்றை மாற்றி கேலரியைப் புதுப்பிக்கவும்.",
+    focusCard: {
+      title: "கவனம்",
+      subtitle: "கவனம் நேரத்தை தொடங்கி, முடிந்ததும் ஓய்வு நினைவூட்டு பெறுங்கள்.",
+      durationLabel: "நேரம்",
+      minutes: "{{value}} நிமி",
+      start: "தொடங்கு",
+      pause: "இடைநிறுத்து",
+      resume: "தொடர்த்து",
+      reset: "மீட்டமை",
+      breakMessage: "நேரம் முடிந்தது. சிறிது ஓய்வு எடுக்கவும்.",
+      status: {
+        idle: "தயார்",
+        running: "நடைபெறுகிறது",
+        paused: "இடைநிறுத்தப்பட்டது",
+        done: "முடிந்தது",
+      },
     },
+
     settingsCard: {
       title: "அமைப்புகள்",
     },
@@ -213,7 +221,6 @@
 } as const;
 
 export default ta;
-
 
 
 

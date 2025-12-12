@@ -1,6 +1,7 @@
 ﻿"use client";
 
 import { useEffect, useMemo, useState, useCallback } from "react";
+import { createPortal } from "react-dom";
 
 import { Card } from "@/components/ui/card";
 import { useBusStopContext } from "@/contexts/bus-stop-context";
@@ -44,6 +45,7 @@ export default function SettingsCard() {
 }
 
 function SettingsModal({ onClose }: { onClose: () => void }) {
+  const [mounted, setMounted] = useState(false);
   const [manualInput, setManualInput] = useState("");
   const { availableThemes, themeId, setThemeId } = useThemeContext();
   const { selection, setSelection, presets } = useWeatherLocation();
@@ -152,8 +154,14 @@ function SettingsModal({ onClose }: { onClose: () => void }) {
     [availableThemes],
   );
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4 py-6 backdrop-blur-md">
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
+
+  return createPortal(
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 px-4 py-6 backdrop-blur">
       <div className="relative flex h-[min(92vh,720px)] w-[min(100%,960px)] flex-col overflow-hidden rounded-3xl border border-white/15 bg-black/85 text-white shadow-2xl">
         <header className="flex items-start justify-between gap-4 border-b border-white/10 px-6 py-5">
           <div>
@@ -371,8 +379,7 @@ function SettingsModal({ onClose }: { onClose: () => void }) {
           </section>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
-
-
